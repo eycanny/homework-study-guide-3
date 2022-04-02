@@ -25,7 +25,23 @@ def show_form():
 @app.route('/results')
 def show_results():
     """Show resulting message."""
-    return render_template('results.html')
+
+    MESSAGES = {
+        'cheery' : "You're doing great!",
+        'honest' : "Honesty is more than not lying.",
+        'dreary' : "Death is inevitable..."
+    }
+
+    messages_to_user = []
+
+    message_types = request.args.getlist("messages")
+
+    for message_type in message_types:
+        message = MESSAGES.get(message_type)
+        messages_to_user.append(message)
+
+
+    return render_template('results.html', messages=messages_to_user)
 
 @app.route('/save-name')
 def save_name():
