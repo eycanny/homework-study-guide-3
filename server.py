@@ -27,6 +27,14 @@ def show_results():
     """Show resulting message."""
     return render_template('results.html')
 
+@app.route('/save-name')
+def save_name():
+    """Save user's name input to a session."""
+
+    session['name'] = request.args.get('name')
+
+    return redirect('/')
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
